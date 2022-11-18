@@ -7,8 +7,12 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
-                archiveArtifacts artifacts: '*.jar'
             }
         }
+    }
+        post {
+        always {
+            archiveArtifacts artifacts: '*.jar', onlyIfSuccessful: true
+    }
     }
 }
